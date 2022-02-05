@@ -5,7 +5,7 @@
     "48": "resources/jsonvue48.png",
     "128": "resources/jsonvue128.png"
   },
-  "version": "0.1.17.1",
+  "version": "0.1.17.2",
   "description": "Validate and view JSON documents",
   "options_ui": {
     "browser_style": true,
@@ -13,10 +13,7 @@
     "open_in_tab": false
   },
   "background": {
-    "scripts": [
-      "js/background.js"
-    ],
-    "persistent": false
+    "service_worker": "js/background.js"
   },
   "content_scripts": [
     {
@@ -37,5 +34,5 @@
     "contextMenus",
     "storage"
   ],
-  "manifest_version": 2
+  "manifest_version": 3
 }
