@@ -4,6 +4,7 @@ const WORKER_API_AVAILABLE = typeof Worker != "undefined";
 const LOCAL_STORAGE_API_AVAILABLE = typeof localStorage != "undefined";
 const MENU_ID_COPY_PATH = "copy-path";
 const MENU_ID_COPY_VALUE = "copy-value";
+const MENU_ID_COPY_VALUE_WITH_QUOTES = "copy-value-with-quotes";
 const MENU_ID_COPY_JSON_VALUE = "copy-json-value";
 const DEFAULT_OPTIONS = {
 	maxDepthLevelExpanded: 0,
@@ -55,12 +56,15 @@ async function migrateSettings() {
 }
 
 async function initDefaultSettings(settings) {
+	let optionsChanged = false;
+	
 	if (!settings.options) {
 		settings.options = {};
 		optionsChanged = true;
 	}
+
 	const options = settings.options;
-	let optionsChanged;
+	
 	if (typeof options.maxDepthLevelExpanded == "undefined") {
 		options.maxDepthLevelExpanded = DEFAULT_OPTIONS.maxDepthLevelExpanded;
 		optionsChanged = true;
@@ -176,6 +180,11 @@ function addMenuEntry(removeAll) {
 	chrome.contextMenus.create({
 		id: MENU_ID_COPY_VALUE,
 		title: "Copy value",
+		contexts: ["page", "link"]
+	});
+	chrome.contextMenus.create({
+		id: MENU_ID_COPY_VALUE_WITH_QUOTES,
+		title: "Copy value (quoted)",
 		contexts: ["page", "link"]
 	});
 	chrome.contextMenus.create({

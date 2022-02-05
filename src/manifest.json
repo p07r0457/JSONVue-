@@ -1,11 +1,11 @@
 {
-  "name": "JSONVue",
+  "name": "JSONVuePlus",
   "icons": {
     "16": "resources/jsonvue16.png",
     "48": "resources/jsonvue48.png",
     "128": "resources/jsonvue128.png"
   },
-  "version": "0.1.17",
+  "version": "0.1.17.1",
   "description": "Validate and view JSON documents",
   "options_ui": {
     "browser_style": true,

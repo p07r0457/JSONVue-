@@ -12,6 +12,7 @@ const TITLE_VIEW_SOURCE = "view unformatted source";
 const LABEL_VIEW_SOURCE = "view source";
 const MENU_ID_COPY_PATH = "copy-path";
 const MENU_ID_COPY_VALUE = "copy-value";
+const MENU_ID_COPY_VALUE_WITH_QUOTES = "copy-value-with-quotes";
 const MENU_ID_COPY_JSON_VALUE = "copy-json-value";
 // cf. https://github.com/mathiasbynens/mothereff.in/blob/master/js-variables/eff.js
 // eslint-disable-next-line no-misleading-character-class
@@ -835,7 +836,7 @@ chrome.runtime.onMessage.addListener(message => {
 	if (message.copy) {
 		if (message.type == MENU_ID_COPY_PATH && jsonPath) {
 			copyText(jsonPath);
-		} else if (message.type == MENU_ID_COPY_VALUE || message.type == MENU_ID_COPY_JSON_VALUE) {
+		} else if (message.type == MENU_ID_COPY_VALUE || message.type == MENU_ID_COPY_VALUE_WITH_QUOTES || message.type == MENU_ID_COPY_JSON_VALUE) {
 			let value = jsonObject;
 			copiedSelector.forEach(propertyName => value = value[propertyName]);
 			if (value) {
@@ -845,6 +846,10 @@ chrome.runtime.onMessage.addListener(message => {
 					value = JSON.stringify(value);
 				}
 				if (message.type == MENU_ID_COPY_VALUE) {
+					if (value.startsWith("\"") || value.startsWith("\'")) value = value.substring(1, value.length);
+					if (value.endsWith("\"") || value.endsWith("\'")) value = value.substring(0, value.length - 1);
+					copyText(value);
+				} else if (message.type == MENU_ID_COPY_VALUE_WITH_QUOTES) {
 					copyText(value);
 				} else if (message.type == MENU_ID_COPY_JSON_VALUE) {
 					copyText(JSON.stringify(value));

@@ -1,4 +1,3 @@
-# JSONVue
-Fork of JSONView for Chromium-based browsers
+# JSONVuePlus
 
-This is the source code of JSONVue on Chrome, see https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc
+Fork of [JSONVue](https://github.com/gildas-lormeau/JSONVue) for Chromium-based browsers
